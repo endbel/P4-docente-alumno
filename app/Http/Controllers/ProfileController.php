@@ -67,4 +67,11 @@ class ProfileController extends Controller
             'users' => $users,
         ]);
     }
+
+    public function show(User $user): View
+    {
+        return view('admin.users.show', [
+            'user' => $user,
+        ]);
+    }
 }

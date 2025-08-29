@@ -25,6 +25,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/users', [ProfileController::class, 'index'])
         ->name('admin.users.index')
         ->can('viewAny', \App\Models\User::class);
+
+        Route::get('/admin/users/{user}', [ProfileController::class, 'show'])
+        ->name('admin.users.show')
+        ->can('view', 'user'); // Usaremos la regla 'view' de la Policy
 });
 
 // Incluye las rutas de autenticación (login, registro, etc.)
