@@ -1,4 +1,9 @@
 Aplicación de Gestión de Alumnos y Docentes (TUP - Programación IV)
+
+Integrantes:
+Rodríguez, Belén
+Benitez, Dario
+
 Este proyecto es una aplicación web desarrollada en Laravel 12 que gestiona usuarios con dos roles simples: administrador (docente) y alumno. El sistema permite a los administradores ver un listado de todos los usuarios registrados, mientras que los alumnos pueden ver y modificar su propio perfil.
 
 
