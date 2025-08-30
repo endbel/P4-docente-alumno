@@ -33,13 +33,11 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'phone' => ['nullable', 'string', 'max:20'],
+            'phone' => ['required', 'string', 'max:20'],
             'professional_url' => ['nullable', 'url', 'max:255'],
-            // Corregido aquí: de 'photo' a 'photo_path' para que coincida con el formulario y la BD
             'photo_path' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
         ]);
 
-        // Corregido aquí: de 'photo' a 'photo_path'
         $path = $request->file('photo_path')->store('profile-photos', 'public');
 
         $user = User::create([
@@ -48,8 +46,8 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($validated['password']),
             'phone' => $validated['phone'] ?? null,
             'professional_url' => $validated['professional_url'] ?? null,
-            'photo_path' => $path, // Se guarda la ruta del archivo
-            'is_admin' => false, // Todos los nuevos registros son alumnos
+            'photo_path' => $path, 
+            'is_admin' => false, 
         ]);
 
         event(new Registered($user));
