@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
 
 // Ruta de bienvenida
 Route::get('/', function () {
@@ -9,9 +10,9 @@ Route::get('/', function () {
 });
 
 // Ruta del dashboard, requiere autenticación
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 // Rutas del perfil del usuario, requieren autenticación
 Route::middleware('auth')->group(function () {

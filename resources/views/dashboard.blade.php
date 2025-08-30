@@ -7,11 +7,20 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
+            
+            @if (session('status'))
+                <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6" role="alert">
+                    <p class="font-bold">¡Bienvenido!</p>
+                    <p>{{ session('status') }}</p>
                 </div>
-            </div>
+            @endif
+
+            @if ($user->is_admin)
+                @include('dashboard-partials.admin-dashboard', ['user' => $user])
+            @else
+                @include('dashboard-partials.student-dashboard', ['user' => $user])
+            @endif
+
         </div>
     </div>
 </x-app-layout>
